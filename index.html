@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Konstantin Krapivin — Videographer & Editor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #0A0A08;
+      --text:    #EDEAE2;
+      --accent:  #E5410A;
+      --surface: #111110;
+      --muted:   #545450;
+      --muted2:  #2E2E2C;
+      --line:    #1E1E1C;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Space Grotesk', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 44px;
+    }
+    nav::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(10,10,8,.92) 0%, transparent 100%);
+      pointer-events: none;
+    }
+    .nav-logo {
+      position: relative;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .nav-logo .dot { color: var(--accent); }
+    .nav-links {
+      position: relative;
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* ─── HERO ─── */
+    #hero {
+      position: relative;
+      height: 100vh;
+      min-height: 640px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+    .hero-img {
+      position: absolute;
+      inset: 0;
+    }
+    .hero-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center 40%;
+      filter: brightness(.6);
+    }
+    .hero-img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, transparent 42%, rgba(10,10,8,.98) 100%),
+        radial-gradient(ellipse 110% 100% at 50% 60%, transparent 40%, rgba(0,0,0,.55) 100%);
+    }
+    .hero-body {
+      position: relative;
+      z-index: 10;
+      padding: 0 44px 48px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 32px;
+    }
+    .hero-headline {
+      font-weight: 700;
+      font-size: clamp(56px, 8.5vw, 124px);
+      line-height: .88;
+      letter-spacing: -.03em;
+      text-transform: uppercase;
+    }
+    .hero-headline .hl2 { color: var(--accent); }
+    .hero-aside {
+      text-align: right;
+      flex-shrink: 0;
+      padding-bottom: 6px;
+    }
+    .hero-role {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .hero-feat {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .hero-tc {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: var(--muted2);
+      margin-top: 5px;
+    }
+    /* scroll line */
+    .scroll-line {
+      position: absolute;
+      bottom: 44px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      z-index: 10;
+      animation: scrollBob 2.2s ease-in-out infinite;
+    }
+    .scroll-line span {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .scroll-line::after {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 36px;
+      background: linear-gradient(180deg, var(--muted) 0%, transparent 100%);
+    }
+    @keyframes scrollBob {
+      0%,100% { transform: translateX(-50%) translateY(0); }
+      55%      { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* ─── WORK ─── */
+    #work { padding: 0 44px 80px; }
+
+    .section-bar {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 28px 0 20px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 3px;
+    }
+    .section-lbl {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .section-cnt {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: var(--accent);
+    }
+    .filters {
+      margin-left: auto;
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+    }
+    .fbtn {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 5px 13px;
+      background: none;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      cursor: pointer;
+      transition: border-color .15s, color .15s;
+    }
+    .fbtn:hover { border-color: var(--muted2); color: var(--text); }
+    .fbtn.on    { border-color: var(--accent); color: var(--accent); }
+
+    /* GRID */
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3px;
+      align-items: start;
+    }
+    .wcard {
+      display: block;
+      text-decoration: none;
+      background: var(--surface);
+      overflow: hidden;
+      position: relative;
+    }
+    .wcard.wide { grid-column: span 2; }
+    .wcard.off  { display: none; }
+
+    .cframe {
+      position: relative;
+      aspect-ratio: 16/9;
+      overflow: hidden;
+    }
+    .cframe img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform .75s cubic-bezier(.25,.46,.45,.94), filter .4s;
+      filter: brightness(.82) saturate(.88);
+    }
+    .wcard:hover .cframe img {
+      transform: scale(1.05);
+      filter: brightness(.64) saturate(.8);
+    }
+    /* vignette */
+    .cvign {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 90% 90% at 50% 50%, transparent 46%, rgba(0,0,0,.68) 100%);
+      pointer-events: none;
+      z-index: 2;
+    }
+    /* timecode top-left */
+    .ctc {
+      position: absolute;
+      top: 11px; left: 14px;
+      z-index: 4;
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      color: rgba(237,234,226,.38);
+      letter-spacing: .04em;
+      pointer-events: none;
+    }
+    /* category tag top-right */
+    .ctag {
+      position: absolute;
+      top: 11px; right: 14px;
+      z-index: 4;
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: rgba(229,65,10,.72);
+      pointer-events: none;
+    }
+    /* hover overlay */
+    .chovr {
+      position: absolute;
+      inset: 0;
+      z-index: 5;
+      background: linear-gradient(to top, rgba(10,10,8,.88) 0%, transparent 52%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 18px 20px;
+      opacity: 0;
+      transition: opacity .28s ease;
+    }
+    .wcard:hover .chovr { opacity: 1; }
+    .chovr-title {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      color: var(--text);
+      line-height: 1.1;
+      margin-bottom: 5px;
+    }
+    .chovr-sub {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    /* card info bar */
+    .cinfo {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 11px 14px 12px;
+      border-top: 1px solid var(--line);
+    }
+    .cname {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      color: var(--text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .cyear {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: var(--muted);
+      flex-shrink: 0;
+    }
+
+    /* ─── ABOUT ─── */
+    #about {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 64px;
+      padding: 80px 44px;
+      border-top: 1px solid var(--line);
+      align-items: start;
+    }
+    .about-side {
+      position: sticky;
+      top: 80px;
+    }
+    .about-side .section-lbl { display: block; margin-bottom: 28px; }
+    .about-side-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+    }
+    .about-side-links a {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--text);
+      text-decoration: none;
+      transition: color .2s;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .about-side-links a:hover { color: var(--accent); }
+    .contact-lbl {
+      font-family: 'Space Mono', monospace;
+      font-size: 8px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: block;
+    }
+    .footer-links a {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .footer-links .contact-lbl {
+      color: var(--muted2);
+    }
+    .about-main h2 {
+      font-size: clamp(30px, 3.8vw, 54px);
+      font-weight: 700;
+      line-height: 1.0;
+      letter-spacing: -.02em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+    .about-main h2 .em { color: var(--accent); }
+    .about-bio {
+      font-size: 17px;
+      line-height: 1.74;
+      color: rgba(237,234,226,.65);
+      max-width: 560px;
+      text-wrap: pretty;
+      margin-bottom: 44px;
+    }
+    .skills {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      max-width: 560px;
+    }
+    .skill {
+      padding: 11px 0;
+      border-top: 1px solid var(--line);
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      transition: color .2s;
+    }
+    .skill:hover { color: var(--text); }
+    .skill::before { content: '—'; color: var(--accent); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 34px 44px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-logo {
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+    .footer-logo .dot { color: var(--accent); }
+    .footer-links {
+      display: flex;
+      gap: 28px;
+    }
+    .footer-links a {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .footer-links a:hover { color: var(--accent); }
+    .footer-copy {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: var(--muted2);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 960px) {
+      nav { padding: 18px 24px; }
+      .hero-body { padding: 0 24px 36px; }
+      #work { padding: 0 24px 60px; }
+      .work-grid { grid-template-columns: 1fr 1fr; }
+      .wcard.wide { grid-column: span 2; }
+      #about { grid-template-columns: 1fr; padding: 60px 24px; }
+      footer { padding: 28px 24px; }
+    }
+    @media (max-width: 600px) {
+      .work-grid { grid-template-columns: 1fr; }
+      .wcard.wide { grid-column: span 1; }
+      .filters { display: none; }
+      .hero-headline { font-size: clamp(48px, 13vw, 80px); }
+      .hero-aside { display: none; }
+      .scroll-line { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav>
+  <a href="#" class="nav-logo">Konstantin Krapivin<span class="dot">.</span></a>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero">
+  <div class="hero-img">
+    <img src="uploads/photo_13_2026-06-10_15-56-08.jpg" alt="" />
+  </div>
+  <div class="hero-body">
+    <h1 class="hero-headline">
+      Video<br><span class="hl2">grapher</span>
+    </h1>
+    <div class="hero-aside">
+      <div class="hero-role">Director &amp; Editor</div>
+      <div class="hero-feat">↑ Caucasus Road — 2023</div>
+      <div class="hero-tc">TC 00:01:44:12</div>
+    </div>
+  </div>
+  <div class="scroll-line"><span>Scroll</span></div>
+</section>
+
+<!-- ═══ WORK ═══ -->
+<section id="work">
+  <div class="section-bar">
+    <span class="section-lbl">Selected Work</span>
+    <span class="section-cnt" id="wcnt">06</span>
+    <div class="filters">
+      <button class="fbtn on"  data-f="all">All</button>
+      <button class="fbtn"     data-f="mv">Music Video</button>
+      <button class="fbtn"     data-f="concert">Concert</button>
+      <button class="fbtn"     data-f="travel">Travel</button>
+      <button class="fbtn"     data-f="corp">Corporate</button>
+    </div>
+  </div>
+
+  <div class="work-grid" id="wgrid">
+
+    <!-- 01 — ZUKAA / JUST DANCE (wide) -->
+    <a class="wcard wide" href="javascript:void(0)" data-cat="mv">
+      <div class="cframe">
+        <img src="uploads/photo_15_2026-06-10_15-56-08.jpg" alt="Zukaa — Just Dance" />
+        <div class="cvign"></div>
+        <div class="ctc">TC 00:02:18:04</div>
+        <div class="ctag">MV / Dance</div>
+        <div class="chovr">
+          <div class="chovr-title">Zukaa — Just Dance</div>
+          <div class="chovr-sub">Music Video · Dance · 2024</div>
+        </div>
+      </div>
+      <div class="cinfo">
+        <span class="cname">Zukaa — Just Dance</span>
+        <span class="cyear">2024</span>
+      </div>
+    </a>
+
+    <!-- 02 — STEADY KNOCKING -->
+    <a class="wcard" href="javascript:void(0)" data-cat="mv">
+      <div class="cframe">
+        <img src="uploads/photo_2026-06-10_15-55-49.jpg" alt="Steady Knocking" />
+        <div class="cvign"></div>
+        <div class="ctc">TC 00:00:32:16</div>
+        <div class="ctag">MV / Exp</div>
+        <div class="chovr">
+          <div class="chovr-title">Steady Knocking</div>
+          <div class="chovr-sub">Music Video · Experimental · 2023</div>
+        </div>
+      </div>
+      <div class="cinfo">
+        <span class="cname">Steady Knocking</span>
+        <span class="cyear">2023</span>
+      </div>
+    </a>
+
+    <!-- 03 — NIGHT CITY -->
+    <a class="wcard" href="javascript:void(0)" data-cat="mv">
+      <div class="cframe">
+        <img src="uploads/photo_19_2026-06-10_15-56-08.jpg" alt="Night City" />
+        <div class="cvign"></div>
+        <div class="ctc">TC 00:03:11:22</div>
+        <div class="ctag">MV / Hip-Hop</div>
+        <div class="chovr">
+          <div class="chovr-title">Night City</div>
+          <div class="chovr-sub">Music Video · Hip-Hop · 2024</div>
+        </div>
+      </div>
+      <div class="cinfo">
+        <span class="cname">Night City</span>
+        <span class="cyear">2024</span>
+      </div>
+    </a>
+
+    <!-- 04 — SOUTHEAST PASSAGES (wide) -->
+    <a class="wcard wide" href="javascript:void(0)" data-cat="travel">
+      <div class="cframe">
+        <img src="uploads/photo_12_2026-06-10_15-56-08.jpg" alt="Southeast Passages" />
+        <div class="cvign"></div>
+        <div class="ctc">TC 00:07:44:08</div>
+        <div class="ctag">Travel / Lifestyle</div>
+        <div class="chovr">
+          <div class="chovr-title">Southeast Passages</div>
+          <div class="chovr-sub">Travel · Lifestyle · 2023</div>
+        </div>
+      </div>
+      <div class="cinfo">
+        <span class="cname">Southeast Passages</span>
+        <span class="cyear">2023</span>
+      </div>
+    </a>
+
+    <!-- 05 — CAUCASUS ROAD -->
+    <a class="wcard" href="javascript:void(0)" data-cat="concert">
+      <div class="cframe">
+        <img src="uploads/photo_6_2026-06-10_15-56-08.jpg" alt="Caucasus Road" />
+        <div class="cvign"></div>
+        <div class="ctc">TC 00:05:02:14</div>
+        <div class="ctag">Concert / Doc</div>
+        <div class="chovr">
+          <div class="chovr-title">Caucasus Road</div>
+          <div class="chovr-sub">Concert Doc · Live · 2023</div>
+        </div>
+      </div>
+      <div class="cinfo">
+        <span class="cname">Caucasus Road</span>
+        <span class="cyear">2023</span>
+      </div>
+    </a>
+
+    <!-- 06 — STEEL & SKY -->
+    <a class="wcard" href="javascript:void(0)" data-cat="corp">
+      <div class="cframe">
+        <img src="uploads/photo_2_2026-06-10_15-56-08.jpg" alt="Steel &amp; Sky" />
+        <div class="cvign"></div>
+        <div class="ctc">TC 00:00:18:06</div>
+        <div class="ctag">Corp / Industrial</div>
+        <div class="chovr">
+          <div class="chovr-title">Steel &amp; Sky</div>
+          <div class="chovr-sub">Corporate · Industrial · 2024</div>
+        </div>
+      </div>
+      <div class="cinfo">
+        <span class="cname">Steel &amp; Sky</span>
+        <span class="cyear">2024</span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ═══ ABOUT ═══ -->
+<section id="about">
+  <aside class="about-side">
+    <span class="section-lbl">About</span>
+    <ul class="about-side-links">
+      <li><a href="mailto:jaliuwa22@gmail.com"><span class="contact-lbl">Email</span>jaliuwa22@gmail.com</a></li>
+      <li><a href="https://instagram.com/jaliuwa" target="_blank"><span class="contact-lbl">Instagram</span>@jaliuwa</a></li>
+      <li><a href="https://t.me/jaliuwa" target="_blank"><span class="contact-lbl">Telegram</span>@jaliuwa</a></li>
+    </ul>
+  </aside>
+  <div class="about-main">
+    <h2>Raw vision.<br><span class="em">Polished</span> frame.</h2>
+    <p class="about-bio">
+      Videographer and editor working across music videos, concert documentation, travel lifestyle, and commercial production. Equally at home in a pit during a noise-punk set as on a hilltop at golden hour — the work moves freely between documentary rawness and deliberate visual craft. Based wherever the next project takes.
+    </p>
+    <div class="skills">
+      <div class="skill">Music Video</div>
+      <div class="skill">Concert Doc</div>
+      <div class="skill">Travel Lifestyle</div>
+      <div class="skill">Dance &amp; Performance</div>
+      <div class="skill">Hip-Hop &amp; Street</div>
+      <div class="skill">BMX / Graffiti</div>
+      <div class="skill">Corporate / Industrial</div>
+      <div class="skill">Color Grading</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer id="contact">
+  <div class="footer-logo">Konstantin Krapivin<span class="dot">.</span></div>
+  <div class="footer-links">
+    <a href="mailto:jaliuwa22@gmail.com"><span class="contact-lbl">Email</span>jaliuwa22@gmail.com</a>
+    <a href="https://instagram.com/jaliuwa" target="_blank"><span class="contact-lbl">Instagram</span>@jaliuwa</a>
+    <a href="https://t.me/jaliuwa" target="_blank"><span class="contact-lbl">Telegram</span>@jaliuwa</a>
+  </div>
+  <div class="footer-copy">© 2024</div>
+</footer>
+
+<script>
+  const btns  = document.querySelectorAll('.fbtn');
+  const cards = document.querySelectorAll('.wcard');
+  const cnt   = document.getElementById('wcnt');
+
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      btns.forEach(b => b.classList.remove('on'));
+      btn.classList.add('on');
+      const f = btn.dataset.f;
+      let n = 0;
+      cards.forEach(c => {
+        const show = f === 'all' || c.dataset.cat === f;
+        c.classList.toggle('off', !show);
+        if (show) n++;
+      });
+      cnt.textContent = String(n).padStart(2, '0');
+    });
+  });
+</script>
+</body>
+</html>
